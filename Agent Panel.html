@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Order Form</title>
+</head>
+<body>
+  <h2>Place Farmer Order</h2>
+  <form id="orderForm">
+    <h3>Farmer Details</h3>
+    Farmer Name: <input type="text" id="farmerName" required><br><br>
+    Contact No: <input type="tel" id="contact" required><br><br>
+
+    <h4>Address</h4>
+    At: <input type="text" id="at" required><br><br>
+    Post: <input type="text" id="post" required><br><br>
+    Taluka: <input type="text" id="taluka" required><br><br>
+
+    District:
+    <select id="district" required>
+      <option value="">-- Select District --</option>
+      <option value="Ahmednagar">Ahmednagar</option>
+      <option value="Akola">Akola</option>
+      <option value="Amravati">Amravati</option>
+      <option value="Aurangabad">Aurangabad</option>
+      <option value="Beed">Beed</option>
+      <option value="Bhandara">Bhandara</option>
+      <option value="Buldhana">Buldhana</option>
+      <option value="Chandrapur">Chandrapur</option>
+      <option value="Dhule">Dhule</option>
+      <option value="Gadchiroli">Gadchiroli</option>
+      <option value="Gondia">Gondia</option>
+      <option value="Hingoli">Hingoli</option>
+      <option value="Jalgaon">Jalgaon</option>
+      <option value="Jalna">Jalna</option>
+      <option value="Kolhapur">Kolhapur</option>
+      <option value="Latur">Latur</option>
+      <option value="Mumbai City">Mumbai City</option>
+      <option value="Mumbai Suburban">Mumbai Suburban</option>
+      <option value="Nagpur">Nagpur</option>
+      <option value="Nanded">Nanded</option>
+      <option value="Nandurbar">Nandurbar</option>
+      <option value="Nashik">Nashik</option>
+      <option value="Osmanabad">Osmanabad</option>
+      <option value="Palghar">Palghar</option>
+      <option value="Parbhani">Parbhani</option>
+      <option value="Pune">Pune</option>
+      <option value="Raigad">Raigad</option>
+      <option value="Ratnagiri">Ratnagiri</option>
+      <option value="Sangli">Sangli</option>
+      <option value="Satara">Satara</option>
+      <option value="Sindhudurg">Sindhudurg</option>
+      <option value="Solapur">Solapur</option>
+      <option value="Thane">Thane</option>
+      <option value="Wardha">Wardha</option>
+      <option value="Washim">Washim</option>
+      <option value="Yavatmal">Yavatmal</option>
+    </select><br><br>
+
+    State: <input type="text" id="state" value="Maharashtra" readonly><br><br>
+
+    <h3>Order Details</h3>
+    Employee Name: <input type="text" id="employeeName" required><br><br>
+    Product: <input type="text" id="product" required><br><br>
+    Amount (₹): <input type="number" id="amount" required><br><br>
+
+    <button type="submit">Submit Order</button>
+  </form>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const url = "https://script.google.com/macros/s/AKfycbyCmN5pV6BFdqyJAgetx5T5OtTWzgr6UiyVlTZejPp22FwWjwD6TSGAEzhdmiDs00NHNw/exec";
+
+      const data = {
+        farmerName: document.getElementById("farmerName").value,
+        contact: document.getElementById("contact").value,
+        at: document.getElementById("at").value,
+        post: document.getElementById("post").value,
+        taluka: document.getElementById("taluka").value,
+        district: document.getElementById("district").value,
+        state: document.getElementById("state").value,
+        employeeName: document.getElementById("employeeName").value,
+        product: document.getElementById("product").value,
+        amount: document.getElementById("amount").value
+      };
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.text())
+      .then(response => alert("✅ Order submitted successfully!"))
+      .catch(error => alert("❌ Error: " + error));
+    });
+  </script>
+</body>
+</html>
